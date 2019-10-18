@@ -1,0 +1,6 @@
+# grabl config
+# @graknlabs_common
+
+dependency-update:
+  run:
+    bazel run @graknlabs_build_tools//sync-dependencies-bazel $GRABL_NEW_DEPENDENCIES
