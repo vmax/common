@@ -6,6 +6,9 @@ jobs:
         bazel run @graknlabs_grabl//correctness:start -- --test test-A --org $CIRCLE_ORG --repo $CIRCLE_REPO --job-id $CIRCLE_JOB_ID
         bazel build //...
         bazel run @graknlabs_grabl//correctness:success -- --test test-A --org $CIRCLE_ORG --repo $CIRCLE_REPO --job-id $CIRCLE_JOB_ID
+  test-performance-small:
+    - run: |
+        bazel test //test/performance:small
   deploy-github:
     - run: echo "deploy github"
   grabl-correctness-completed:

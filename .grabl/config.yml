@@ -1,6 +1,19 @@
 # grabl config
 # @graknlabs_common
 
-dependency-update:
-  run:
-    bazel run @graknlabs_build_tools//sync-dependencies-bazel $GRABL_NEW_DEPENDENCIES
+dependency:
+  update:
+    job:
+      machine: ubuntu-19.10
+      type: foreground
+      run: |
+        bazel run @graknlabs_build_tools//sync-dependencies-bazel $GRABL_NEW_DEPENDENCIES
+
+release:
+  config:
+    version: ./VERSION
+  bump:
+    job:
+      machine: ubuntu 19.10
+      type: foreground
+      run: bazel run @graknlabs_build_tools//ci:version-bump
