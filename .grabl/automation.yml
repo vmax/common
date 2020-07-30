@@ -1,0 +1,59 @@
+build:
+  quality:
+    job:
+      dependency-analysis:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          echo "workflow quality: dependency-analysis"
+  correctness:
+    jobs:
+      build:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          git clone https://github.com/graknlabs-test/common.git
+          cd common
+          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/master/tool/bazelinstall/rbe.sh
+          sudo mkdir -p /home/circleci/.credentials/ && sudo chmod a+w /home/circleci/.credentials/ && bash ./rbe.sh && rm ./rbe.sh
+          bazel build --config=rbe //...
+          bazel run @graknlabs_dependencies//tool/unuseddeps:unused-deps -- list
+      checkstyle:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          git clone https://github.com/graknlabs-test/common.git
+          cd common
+          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/master/tool/bazelinstall/rbe.sh
+          sudo mkdir -p /home/circleci/.credentials/ && sudo chmod a+w /home/circleci/.credentials/ && bash ./rbe.sh && rm ./rbe.sh
+          bazel run @graknlabs_dependencies//tool/checkstyle:test-coverage
+          bazel test --config=rbe $(bazel query 'kind(checkstyle_test, //...)')
+
+    execution:
+      - build
+      - checkstyle
+
+
+release:
+  validation:
+    job:
+      validate-dependencies:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          echo "workflow validation: validate-dependencies"
+  deployment:
+    job:
+      deploy-workbase:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          echo "workflow deployment: deploy-workbase"
+  broadcast:
+    job:
+      broadcast-version:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          echo "workflow bump: bump-version"
+
