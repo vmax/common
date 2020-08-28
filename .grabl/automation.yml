@@ -2,14 +2,14 @@ build:
   quality:
     job:
       dependency-analysis:
-        machine: grabl-ubuntu-2004
+        machine: graknlabs-ubuntu-20.04
         type: foreground
         script: |
           echo "workflow quality: dependency-analysis"
   correctness:
     jobs:
       build:
-        machine: grabl-ubuntu-2004
+        machine: graknlabs-ubuntu-20.04
         type: foreground
         script: |
           git clone https://github.com/graknlabs-test/common.git
@@ -19,7 +19,7 @@ build:
           bazel build --config=rbe //...
           bazel run @graknlabs_dependencies//tool/unuseddeps:unused-deps -- list
       checkstyle:
-        machine: grabl-ubuntu-2004
+        machine: graknlabs-ubuntu-20.04
         type: foreground
         script: |
           git clone https://github.com/graknlabs-test/common.git
@@ -38,21 +38,21 @@ release:
   validation:
     job:
       validate-dependencies:
-        machine: grabl-ubuntu-2004
+        machine: graknlabs-ubuntu-20.04
         type: foreground
         script: |
           echo "workflow validation: validate-dependencies"
   deployment:
     job:
       deploy-workbase:
-        machine: grabl-ubuntu-2004
+        machine: graknlabs-ubuntu-20.04
         type: foreground
         script: |
           echo "workflow deployment: deploy-workbase"
   broadcast:
     job:
       broadcast-version:
-        machine: grabl-ubuntu-2004
+        machine: graknlabs-ubuntu-20.04
         type: foreground
         script: |
           echo "workflow bump: bump-version"
