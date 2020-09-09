@@ -7,31 +7,26 @@ build:
         script: |
           echo "workflow quality: dependency-analysis"
   correctness:
-    jobs:
-      build:
-        machine: graknlabs-ubuntu-20.04
-        type: foreground
-        script: |
-          git clone https://github.com/graknlabs-test/common.git
-          cd common
-          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/master/tool/bazelinstall/rbe.sh
-          sudo mkdir -p /home/circleci/.credentials/ && sudo chmod a+w /home/circleci/.credentials/ && bash ./rbe.sh && rm ./rbe.sh
-          bazel build --config=rbe //...
-          bazel run @graknlabs_dependencies//tool/unuseddeps:unused-deps -- list
-      checkstyle:
-        machine: graknlabs-ubuntu-20.04
-        type: foreground
-        script: |
-          git clone https://github.com/graknlabs-test/common.git
-          cd common
-          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/master/tool/bazelinstall/rbe.sh
-          sudo mkdir -p /home/circleci/.credentials/ && sudo chmod a+w /home/circleci/.credentials/ && bash ./rbe.sh && rm ./rbe.sh
-          bazel run @graknlabs_dependencies//tool/checkstyle:test-coverage
-          bazel test --config=rbe $(bazel query 'kind(checkstyle_test, //...)')
-
-    execution:
-      - build
-      - checkstyle
+    build:
+      machine: graknlabs-ubuntu-20.04
+      type: foreground
+      script: |
+        git clone https://github.com/graknlabs-test/common.git
+        cd common
+        curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/master/tool/bazelinstall/rbe.sh
+        sudo mkdir -p /home/circleci/.credentials/ && sudo chmod a+w /home/circleci/.credentials/ && bash ./rbe.sh && rm ./rbe.sh
+        bazel build --config=rbe //...
+        bazel run @graknlabs_dependencies//tool/unuseddeps:unused-deps -- list
+    checkstyle:
+      machine: graknlabs-ubuntu-20.04
+      type: foreground
+      script: |
+        git clone https://github.com/graknlabs-test/common.git
+        cd common
+        curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/master/tool/bazelinstall/rbe.sh
+        sudo mkdir -p /home/circleci/.credentials/ && sudo chmod a+w /home/circleci/.credentials/ && bash ./rbe.sh && rm ./rbe.sh
+        bazel run @graknlabs_dependencies//tool/checkstyle:test-coverage
+        bazel test --config=rbe $(bazel query 'kind(checkstyle_test, //...)')
 
 
 release:
