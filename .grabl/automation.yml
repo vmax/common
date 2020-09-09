@@ -1,11 +1,10 @@
 build:
   quality:
-    job:
-      dependency-analysis:
-        machine: graknlabs-ubuntu-20.04
-        type: foreground
-        script: |
-          echo "workflow quality: dependency-analysis"
+    dependency-analysis:
+      machine: graknlabs-ubuntu-20.04
+      type: foreground
+      script: |
+        echo "workflow quality: dependency-analysis"
   correctness:
     build:
       machine: graknlabs-ubuntu-20.04
