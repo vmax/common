@@ -31,24 +31,21 @@ build:
 
 release:
   validation:
-    job:
-      validate-dependencies:
-        machine: graknlabs-ubuntu-20.04
-        type: foreground
-        script: |
-          echo "workflow validation: validate-dependencies"
+    validate-dependencies:
+      machine: graknlabs-ubuntu-20.04
+      type: foreground
+      script: |
+        echo "workflow validation: validate-dependencies"
   deployment:
-    job:
-      deploy-workbase:
-        machine: graknlabs-ubuntu-20.04
-        type: foreground
-        script: |
-          echo "workflow deployment: deploy-workbase"
+    deploy-workbase:
+      machine: graknlabs-ubuntu-20.04
+      type: foreground
+      script: |
+        echo "workflow deployment: deploy-workbase"
   broadcast:
-    job:
-      broadcast-version:
-        machine: graknlabs-ubuntu-20.04
-        type: foreground
-        script: |
-          echo "workflow bump: bump-version"
+    broadcast-version:
+      machine: graknlabs-ubuntu-20.04
+      type: foreground
+      script: |
+        echo "workflow bump: bump-version"
 
