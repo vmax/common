@@ -9,6 +9,7 @@ build:
     build:
       machine: graknlabs-ubuntu-20.04
       type: foreground
+      timeout: "10"
       script: |
         git clone https://github.com/graknlabs-test/common.git
         cd common
