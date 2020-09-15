@@ -1,6 +1,6 @@
 version: 2.1
 
-test-assembly-mac-zip:
+build:
     macos:
       xcode: "10.2.1"
     working_directory: ~/grakn
