@@ -1,0 +1,10 @@
+version: 2.1
+
+test-assembly-mac-zip:
+    macos:
+      xcode: "10.2.1"
+    working_directory: ~/grakn
+    steps:
+      - checkout
+      - run: sleep 1h
+
