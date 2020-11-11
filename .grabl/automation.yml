@@ -1,8 +1,2 @@
-build:
-  correctness:
-    build:
-      machine: graknlabs-ubuntu-20.04
-      type: foreground
-      script: |
-        git clone git@github.com:graknlabs-test/grakn-2.0.git
+asd GRABDAGE
 
