@@ -4,4 +4,4 @@ build:
       image: graknlabs-ubuntu-20.04
       type: foreground
       script: |
-        sleep 1800
+        echo "STUNNING SUCCESS"
