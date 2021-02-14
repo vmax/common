@@ -2,6 +2,7 @@ build:
   correctness:
     build:
       image: graknlabs-ubuntu-20.04
+      machine: 8-core-64-gb-2tb-nvme
       type: foreground
       command: |
         echo "STUNNING SUCCESS"
