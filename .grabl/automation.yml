@@ -2,7 +2,8 @@ build:
   correctness:
     build:
       image: graknlabs-ubuntu-20.04
-      machine: 8-core-64-gb-2tb-nvme
+      machine: 1-core-2-gb
       type: foreground
       command: |
         echo "STUNNING SUCCESS"
+        sleep 100
