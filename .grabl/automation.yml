@@ -6,4 +6,3 @@ build:
       type: foreground
       command: |
         echo "STUNNING SUCCESS"
-        sleep 100
